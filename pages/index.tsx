@@ -1,11 +1,22 @@
-import { Inter } from '@next/font/google';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+import CallUsIcon from '../components/icons/CallUs';
+import { languages } from '../constants';
 import styles from '../styles/Home.module.css';
 
-const inter = Inter({ subsets: ['latin'] });
-
 export default function Home() {
+  const [activeLanguage, setActiveLanguage] = useState('hy');
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+
+  const handleOpen = () => setIsLanguageOpen(true);
+  const handleClose = () => setIsLanguageOpen(false);
+  const handleLanguageChange = (language: string) => {
+    setActiveLanguage(language);
+    handleClose();
+  };
+
   return (
     <>
       <Head>
@@ -15,7 +26,30 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.wrapper}>
+        <video muted playsInline autoPlay loop id="videoplayback" className={styles.video}>
+          <source src="/fashion.mov" type="video/mp4" />
+        </video>
         <div className={styles.container}>
+          <div className={styles.header}>
+            <Link href="tel:+37491100919">
+              <CallUsIcon />
+            </Link>
+            <div className={styles.language_container}>
+              <div className={styles.language_switcher} onClick={() => handleOpen()}>
+                {languages[activeLanguage]}
+              </div>
+              {isLanguageOpen &&
+                Object.keys(languages)
+                  .filter((language) => language !== activeLanguage)
+                  .map((el) => {
+                    return (
+                      <div key={el} className={styles.language_switcher} onClick={() => handleLanguageChange(el)}>
+                        {languages[el]}
+                      </div>
+                    );
+                  })}
+            </div>
+          </div>
           <div className={styles.avatar_container}>
             <Image className={styles.avatar} width={100} height={100} src="/gofashion-logo.jpg" alt={'logo'} />
             <div className={styles.title}>Go Fashion Showroom</div>
