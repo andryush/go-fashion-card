@@ -39,8 +39,8 @@ export default function Home() {
               <div className={styles.language_switcher} onClick={() => handleOpen()}>
                 {languages[activeLanguage]}
               </div>
-              {isLanguageOpen &&
-                Object.keys(languages)
+              <div className={`${styles.list} ${isLanguageOpen ? styles.visible : ''}`}>
+                {Object.keys(languages)
                   .filter((language) => language !== activeLanguage)
                   .map((el) => {
                     return (
@@ -49,11 +49,10 @@ export default function Home() {
                       </div>
                     );
                   })}
-              {isLanguageOpen && (
                 <div onClick={handleClose} style={{ cursor: 'pointer' }}>
                   <CloseIcon />
                 </div>
-              )}
+              </div>
             </div>
           </div>
           <div className={styles.avatar_container}>
