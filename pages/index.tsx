@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import CallUsIcon from '../components/icons/CallUs';
+import CloseIcon from '../components/icons/CloseIcon';
 import { languages } from '../constants';
 import styles from '../styles/Home.module.css';
 
@@ -48,6 +49,11 @@ export default function Home() {
                       </div>
                     );
                   })}
+              {isLanguageOpen && (
+                <div onClick={handleClose} style={{ cursor: 'pointer' }}>
+                  <CloseIcon />
+                </div>
+              )}
             </div>
           </div>
           <div className={styles.avatar_container}>
