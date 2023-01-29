@@ -18,6 +18,11 @@ export default function Home() {
     handleClose();
   };
 
+  const getCurrentYear = () => {
+    const newDate = new Date();
+    return newDate.getFullYear();
+  };
+
   return (
     <>
       <Head>
@@ -78,6 +83,11 @@ export default function Home() {
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
       />
+      <footer>
+        <div className={styles.footer_container}>
+          <p className={styles.copyright}>&#169; {getCurrentYear()} GoFashion, Made with ❤️</p>
+        </div>
+      </footer>
     </>
   );
 }
