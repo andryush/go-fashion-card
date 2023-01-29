@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import CallUsIcon from '../components/icons/CallUs';
 import CloseIcon from '../components/icons/CloseIcon';
-import { languages } from '../constants';
+import { data, languages } from '../constants';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
@@ -56,25 +56,28 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.avatar_container}>
-            <Image className={styles.avatar} width={100} height={100} src="/gofashion-logo.jpg" alt={'logo'} />
+            <Image className={styles.avatar} width={150} height={150} src="/gofashion-logo.jpg" alt={'logo'} />
             <div className={styles.title}>Go Fashion Showroom</div>
           </div>
           <div className={styles.content_container}>
-            <div className={styles.button}>
-              <div className={styles.text}>Content</div>
-            </div>
-            <div className={styles.button}>
-              <div className={styles.text}>Content</div>
-            </div>
-            <div className={styles.button}>
-              <div className={styles.text}>Content</div>
-            </div>
-            <div className={styles.button}>
-              <div className={styles.text}>Content</div>
-            </div>
+            {data?.[activeLanguage].map((el) => {
+              return (
+                <Link href={el.link} className={styles.button} target="_blank" key={el.title}>
+                  <div className={styles.text}>{el.title}</div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>
+      <iframe
+        title="maps"
+        className={styles.maps}
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1524.5372714338303!2d44.5044564!3d40.162894!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406abd9428540b71%3A0x5db3f83c0475bf80!2sShopping%20City!5e0!3m2!1sen!2s!4v1675021015560!5m2!1sen!2s"
+        width="100%"
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      />
     </>
   );
 }
