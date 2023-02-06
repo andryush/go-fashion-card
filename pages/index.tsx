@@ -49,7 +49,7 @@ export default function Home() {
         </video>
         <div className={styles.container}>
           <div className={styles.header}>
-            <Link href="tel:+37491100919">
+            <Link href="tel:+37491100919" onClick={() => handleTrackLinks('call')}>
               <CallUsIcon />
             </Link>
             <div className={styles.language_container}>
