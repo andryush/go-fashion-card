@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { event } from 'nextjs-google-analytics';
 import { useState } from 'react';
 import CallUsIcon from '../components/icons/CallUs';
 import CloseIcon from '../components/icons/CloseIcon';
@@ -14,8 +15,19 @@ export default function Home() {
   const handleOpen = () => setIsLanguageOpen(true);
   const handleClose = () => setIsLanguageOpen(false);
   const handleLanguageChange = (language: string) => {
+    event('active_language', {
+      category: 'Active language',
+      message: language,
+    });
     setActiveLanguage(language);
     handleClose();
+  };
+
+  const handleTrackLinks = (title: string) => {
+    event('link', {
+      category: 'link',
+      message: title,
+    });
   };
 
   const getCurrentYear = () => {
@@ -67,7 +79,7 @@ export default function Home() {
           <div className={styles.content_container}>
             {data?.[activeLanguage].map((el) => {
               return (
-                <Link href={el.link} className={styles.button} target="_blank" key={el.title}>
+                <Link href={el.link} className={styles.button} target="_blank" key={el.title} onClick={() => handleTrackLinks(el.title)}>
                   <div className={styles.text}>{el.title}</div>
                 </Link>
               );
