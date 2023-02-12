@@ -17,7 +17,7 @@ export default function Home() {
   const handleLanguageChange = (language: string) => {
     event('active_language', {
       category: 'Active language',
-      message: language,
+      label: language,
     });
     setActiveLanguage(language);
     handleClose();
@@ -26,7 +26,7 @@ export default function Home() {
   const handleTrackLinks = (title: string) => {
     event('link', {
       category: 'link',
-      message: title,
+      label: title,
     });
   };
 
